@@ -3,10 +3,8 @@ from kafka import KafkaConsumer
 import json
 import sqlite3
 from datetime import datetime
-import socket
 import os
 
-# Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -50,19 +48,6 @@ def insert_event(event):
     ))
     conn.commit()
     conn.close()
-
-def check_kafka_connection(bootstrap_servers):
-    print(f"Attempting to connect to Kafka brokers: {bootstrap_servers}")
-    for server in bootstrap_servers.split(','):
-        host, port = server.split(':')
-        try:
-            sock = socket.create_connection((host, int(port)), timeout=5)
-            sock.close()
-            print(f"Successfully connected to {server}")
-            return True
-        except socket.error as e:
-            print(f"Failed to connect to {server}: {e}")
-    return False
 
 
 def main():
