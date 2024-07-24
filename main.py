@@ -56,8 +56,8 @@ async def create_event(event: Event, request: Request):
     event_with_id = {
         "id": event_id,
         "topic": event.topic,
-        "data": event.data,
-        "timestamp": datetime.utcnow().isoformat(),
+        "data": event.data.model_dump(),
+        "timestamp": datetime.utcnow().isoformat(),  # Convert to ISO format string
         "source_ip": request.client.host
     }
     

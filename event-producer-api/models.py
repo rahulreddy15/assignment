@@ -1,6 +1,6 @@
 # app/models.py
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Union, Optional
 
@@ -21,14 +21,14 @@ class DepartmentData(BaseModel):
     manager: str
     product_count: int = Field(ge=0)
     total_sales: float = Field(ge=0)
-    last_updated: datetime
+    last_updated: Optional[datetime] = None
 
 class ProductPromotion(BaseModel):
     product_id: str
     promotion_type: str
     discount_percentage: float = Field(ge=0, le=100)
-    start_date: datetime
-    end_date: datetime
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
     minimum_quantity: int = Field(default=1, ge=1)
     maximum_discount: Optional[float] = None
     

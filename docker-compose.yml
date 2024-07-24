@@ -31,6 +31,17 @@ services:
       - .env
     depends_on:
       - kafka
+  
+  monitoring-consumer:
+    build:
+      context: .
+      dockerfile: Dockerfile.monitor
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
+      - KAFKA_MONITORING_TOPIC=monitoring
+      - SERVICE_NAME=monitoring-consumer
+    depends_on:
+      - kafka
 
 volumes:
   data:
