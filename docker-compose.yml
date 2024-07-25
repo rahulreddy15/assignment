@@ -40,19 +40,12 @@ services:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
       - KAFKA_MONITORING_TOPIC=monitoring
       - SERVICE_NAME=monitoring-consumer
+      - DATABASE_PATH=/app/data/monitoring.db
+    volumes:
+      - ./data:/app/data
     depends_on:
       - kafka
   
-  consumers:
-    build:
-      context: .
-      dockerfile: Dockerfile.downstream
-    environment:
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
-      - SERVICE_NAME=consumer
-    depends_on:
-      - kafka
-    
   downstream:
     build:
       context: .
@@ -60,10 +53,24 @@ services:
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
       - SERVICE_NAME=downstream
-      
     depends_on:
       - kafka
   
+  monitoring-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.monitoring-dashboard
+    ports:
+      - "7070:7070"
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
+      - SERVICE_NAME=monitoring-dashboard
+      - DATABASE_PATH=/app/data/monitoring.db
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - kafka
+      - monitoring-consumer
 
 volumes:
   data:

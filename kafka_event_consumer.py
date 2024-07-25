@@ -90,7 +90,6 @@ def create_consumer(topic):
     return KafkaEventConsumer(topic)
 
 if __name__ == "__main__":
-    # Example usage
     topic = 'product_updates'
     consumer = create_consumer(topic)
     consumer.run()

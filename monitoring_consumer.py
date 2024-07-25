@@ -13,7 +13,7 @@ KAFKA_BOOTSTRAP_SERVERS = os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'kafka:9093')
 KAFKA_MONITORING_TOPIC = os.getenv('KAFKA_MONITORING_TOPIC', 'monitoring')
 
 # SQLite database configuration
-DB_NAME = 'monitoring_events.db'
+DB_NAME = os.getenv('DATABASE_PATH', '/app/data/monitoring.db')
 def create_table():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
