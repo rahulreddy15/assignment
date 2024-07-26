@@ -13,7 +13,6 @@ class ProductUpdate(BaseModel):
     stock_quantity: int = Field(ge=0)
     weight: float = Field(gt=0)
     dimensions: str
-    expiration_date: Optional[datetime] = None
 
 class CountryData(BaseModel):
     country_id: str
