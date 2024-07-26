@@ -48,31 +48,6 @@ graph TD
     class MC,DB,FD monitoring
 ```
 
-This diagram illustrates the architecture of our Event-Based Message Exchange System for Real-Time Product Information Updates. Here's a brief overview of the components:
-
-1. **Event Production**: 
-   - Product Information System: Source of changes
-   - Event Producer API: Captures changes and publishes events to Kafka
-
-2. **Kafka Cluster**: 
-   - Kafka Topics: Store and distribute events
-   - Monitoring Topic: Special topic for system monitoring events
-
-3. **Event Consumption**:
-   - Multiple Downstream Consumers: Process events from Kafka topics
-
-4. **Monitoring and Observability**:
-   - Monitoring Consumer: Processes monitoring events
-   - Monitoring Database: Stores monitoring data
-   - Frontend Dashboard: Provides system observability
-
-The color coding helps to distinguish different functional areas of the system:
-- Purple: Kafka Cluster
-- Blue: Event Production
-- Green: Event Consumption
-- Pink: Monitoring and Observability
-
-
 
 ## 1. System Overview
 
@@ -194,22 +169,6 @@ This document describes the architecture and components of our Scalable and Resi
    ```
    docker-compose down
    ```
-
-## System Components
-
-1. **Zookeeper**: Coordinates the Kafka cluster.
-
-2. **Kafka**: Message broker for event streaming.
-
-3. **API (Event Producer)**: FastAPI application that produces events to Kafka topics.
-
-4. **Monitoring Consumer**: Consumes events from the monitoring topic and stores them in a SQLite database.
-
-5. **Downstream Consumer**: Processes events from various topics for downstream applications.
-
-6. **Monitoring Dashboard**: Provides an API for querying monitoring data.
-
-7. **Monitoring Frontend**: Web interface for visualizing monitoring data.
 
 # Multi-Hybrid Cloud Implementation
 
