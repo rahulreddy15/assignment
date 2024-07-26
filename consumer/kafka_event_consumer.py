@@ -6,6 +6,7 @@ import os
 from uuid import uuid4
 from datetime import datetime
 import random
+import argparse
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -90,6 +91,9 @@ def create_consumer(topic):
     return KafkaEventConsumer(topic)
 
 if __name__ == "__main__":
-    topic = 'product_updates'
+    parser = argparse.ArgumentParser(description='Kafka Consumer for specified topic')
+    parser.add_argument('topic', type=str, help='Kafka topic to consume from')
+    args = parser.parse_args()
+    topic = args.topic
     consumer = create_consumer(topic)
     consumer.run()

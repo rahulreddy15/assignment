@@ -15,8 +15,8 @@ class ProductUpdate(BaseModel):
     dimensions: str
     expiration_date: Optional[datetime] = None
 
-class DepartmentData(BaseModel):
-    department_id: str
+class CountryData(BaseModel):
+    country_id: str
     name: str
     manager: str
     product_count: int = Field(ge=0)
@@ -34,4 +34,4 @@ class ProductPromotion(BaseModel):
     
 class Event(BaseModel):
     topic: str
-    data: Union[ProductUpdate, DepartmentData, ProductPromotion]
+    data: Union[ProductUpdate, CountryData, ProductPromotion]
