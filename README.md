@@ -194,27 +194,27 @@ Each system (Product Information System or downstream systems) can deploy and co
 
 ```mermaid
 graph TD
-    subgraph "Cloud Provider A"
+    subgraph CloudProviderA
         PIS[Product Information System]
-        subgraph "Event System Instance A"
+        subgraph EventSystemInstanceA
             EPA_A[Event Producer API]
             KA[Kafka + Zookeeper]
             CA[Consumers]
         end
     end
 
-    subgraph "Cloud Provider B"
+    subgraph CloudProviderB
         DS1[Downstream System 1]
-        subgraph "Event System Instance B"
+        subgraph EventSystemInstanceB
             EPA_B[Event Producer API]
             KB[Kafka + Zookeeper]
             CB[Consumers]
         end
     end
 
-    subgraph "On-Premises"
+    subgraph OnPremises
         DS2[Downstream System 2]
-        subgraph "Event System Instance C"
+        subgraph EventSystemInstanceC
             EPA_C[Event Producer API]
             KC[Kafka + Zookeeper]
             CC[Consumers]
@@ -247,8 +247,10 @@ graph TD
     class PIS,EPA_A,KA,CA cloudA;
     class DS1,EPA_B,KB,CB cloudB;
     class DS2,EPA_C,KC,CC onPrem;
-    class "Event System Instance A","Event System Instance B","Event System Instance C" eventSystem;
+    class EventSystemInstanceA,EventSystemInstanceB,EventSystemInstanceC eventSystem;
 ```
+
+
 
 ## System Configuration and Scalability
 
