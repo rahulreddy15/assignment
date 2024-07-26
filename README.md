@@ -181,63 +181,68 @@ This Event-Based Message Exchange System provides a scalable and resilient archi
 
 ## Reusable Component Architecture
 
-Our event-based system is designed as a reusable, self-contained unit for deployment across multiple cloud environments. This package includes:
+Our event-based system is designed as a reusable, self-contained unit for deployment across multiple cloud environments. Each system (Product Information System or downstream systems) deploys and configures its own instance of this packaged system. This package includes:
 
 1. Event Producer API
 2. Apache Kafka
 3. Zookeeper
 4. Consumers (including the Monitoring Consumer)
 
-Each system (Product Information System or downstream systems) can deploy and configure its own instance of this packaged system, allowing for flexible and distributed event processing.
+The event system is placed before each cloud service system, acting as an intermediary layer for event processing and distribution.
 
 ## Multi-Hybrid Cloud Architecture Diagram
 
 ```mermaid
 graph TD
     subgraph CloudProviderA
-        PIS[Product Information System]
         subgraph EventSystemInstanceA
             EPA_A[Event Producer API]
             KA[Kafka + Zookeeper]
             CA[Consumers]
         end
+        PIS[Product Information System]
     end
 
     subgraph CloudProviderB
-        DS1[Downstream System 1]
         subgraph EventSystemInstanceB
             EPA_B[Event Producer API]
             KB[Kafka + Zookeeper]
             CB[Consumers]
         end
+        DS1[Downstream System 1]
     end
 
     subgraph OnPremises
-        DS2[Downstream System 2]
         subgraph EventSystemInstanceC
             EPA_C[Event Producer API]
             KC[Kafka + Zookeeper]
             CC[Consumers]
         end
+        DS2[Downstream System 2]
     end
 
-    PIS -->|Local Events| EPA_A
     EPA_A -->|Produce Events| KA
     KA -->|Consume Events| CA
-    CA -->|Process Events| DS1
-    CA -->|Process Events| DS2
+    CA -->|Process Events| PIS
 
-    DS1 -->|Local Events| EPA_B
     EPA_B -->|Produce Events| KB
     KB -->|Consume Events| CB
-    CB -->|Process Events| PIS
-    CB -->|Process Events| DS2
+    CB -->|Process Events| DS1
 
-    DS2 -->|Local Events| EPA_C
     EPA_C -->|Produce Events| KC
     KC -->|Consume Events| CC
-    CC -->|Process Events| PIS
-    CC -->|Process Events| DS1
+    CC -->|Process Events| DS2
+
+    PIS -->|Generate Events| EPA_A
+    DS1 -->|Generate Events| EPA_B
+    DS2 -->|Generate Events| EPA_C
+
+    CA -->|Cross-Cloud Events| EPA_B
+    CA -->|Cross-Cloud Events| EPA_C
+    CB -->|Cross-Cloud Events| EPA_A
+    CB -->|Cross-Cloud Events| EPA_C
+    CC -->|Cross-Cloud Events| EPA_A
+    CC -->|Cross-Cloud Events| EPA_B
 
     classDef cloudA fill:#e6f3ff,stroke:#333,stroke-width:2px;
     classDef cloudB fill:#f9e6ff,stroke:#333,stroke-width:2px;
@@ -249,7 +254,6 @@ graph TD
     class DS2,EPA_C,KC,CC onPrem;
     class EventSystemInstanceA,EventSystemInstanceB,EventSystemInstanceC eventSystem;
 ```
-
 
 
 ## System Configuration and Scalability
