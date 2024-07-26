@@ -165,9 +165,51 @@ This document describes the architecture and components of our Scalable and Resi
 - Queries the monitoring database
 - Displays real-time updates and system health metrics
 
-## 6. Deployment and Configuration
+## 6. Deploying / Running The Code
 
-(Note: This section would typically include details about how to deploy and configure the system, including any necessary environment variables, Docker commands, or cloud service configurations.)
+## Prerequisites
+
+- Docker and Docker Compose installed on your system
+- Git 
+
+## Setup and Running
+
+1. Clone the repository (if applicable):
+   ```
+   git clone https://github.com/rahulreddy15/assignment.git
+   cd assignment
+   ```
+
+2. Build and start the services:
+   ```
+   docker-compose up --build
+   ```
+
+3. Access the services:
+   - Event Producer API: http://localhost:8000
+   - Monitoring Dashboard: http://localhost:7070
+   - Monitoring Frontend: http://localhost:8080
+
+4. To stop the services, use:
+   ```
+   docker-compose down
+   ```
+
+## System Components
+
+1. **Zookeeper**: Coordinates the Kafka cluster.
+
+2. **Kafka**: Message broker for event streaming.
+
+3. **API (Event Producer)**: FastAPI application that produces events to Kafka topics.
+
+4. **Monitoring Consumer**: Consumes events from the monitoring topic and stores them in a SQLite database.
+
+5. **Downstream Consumer**: Processes events from various topics for downstream applications.
+
+6. **Monitoring Dashboard**: Provides an API for querying monitoring data.
+
+7. **Monitoring Frontend**: Web interface for visualizing monitoring data.
 
 ## 7. Monitoring and Maintenance
 

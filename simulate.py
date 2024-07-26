@@ -83,8 +83,6 @@ def simulate_api_calls(num_calls):
         except requests.RequestException as e:
             print(f"Call {i+1}: Error making request: {str(e)}")
         
-        # Add a small delay to avoid overwhelming the API
-        time.sleep(0.1)
 
 if __name__ == "__main__":
     num_calls = 1000  # Adjust this number to simulate more or fewer calls
