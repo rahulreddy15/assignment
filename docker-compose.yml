@@ -34,7 +34,7 @@ services:
   
   monitoring-consumer:
     build:
-      context: .
+      context: ./consumer
       dockerfile: Dockerfile.monitor
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
@@ -48,7 +48,7 @@ services:
   
   downstream:
     build:
-      context: .
+      context: ./consumer
       dockerfile: Dockerfile.downstream
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
@@ -58,8 +58,8 @@ services:
   
   monitoring-dashboard:
     build:
-      context: .
-      dockerfile: Dockerfile.monitoring-dashboard
+      context: ./dashboard
+      dockerfile: Dockerfile
     ports:
       - "7070:7070"
     environment:
@@ -71,6 +71,15 @@ services:
     depends_on:
       - kafka
       - monitoring-consumer
+  
+  monitoring-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.monitoring-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - monitoring-dashboard
 
 volumes:
   data:
