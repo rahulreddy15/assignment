@@ -103,17 +103,6 @@ Imagine you've got a product catalog that's always changing. Our system grabs th
 - Dedicated monitoring topic and consumer for tracking system health.
 - Frontend dashboard for real-time visibility into event processing.
 
-## 5. Component Details
-
-### 5.1 Event Producer API
-- **Technology**: FastAPI
-- **Functions**:
-  - Expose HTTP endpoints for manual event creation
-  - Integrate with Product Information System for automatic event capture
-  - Publish events to Kafka topics
-  - Create monitoring events for successful publications
-
-
 ## 5. Deploying / Running The Code
 
 ## Prerequisites
