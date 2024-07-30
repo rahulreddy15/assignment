@@ -51,36 +51,28 @@ graph TD
 
 ## 1. System Overview
 
-This document describes the architecture and components of our Scalable and Resilient Event-Based Message Exchange System, designed for real-time product information updates. The system utilizes Apache Kafka as its core messaging technology to ensure high throughput, scalability, and fault tolerance.
+Imagine you've got a product catalog that's always changing. Our system grabs those changes, turns them into events, and shoots them off to whoever needs to know about them. 
 
 ## 2. Architecture Components
 
 ### 2.1 Product Information System
-- The primary source of product information changes.
-- Serves as the origin for all update events in the system.
+- Where it all starts - the source of all our product updates
 
 ### 2.2 Event Producer API
-- Implemented as a FastAPI server.
-- Responsible for adding change events to Kafka topics.
-- Provides HTTP endpoints for manual event creation.
-- Supports automatic event creation through Change Data Capture (CDC).
+- The messenger (built with FastAPI) - it's got HTTP endpoints for manual event creation and supports automatic event capture through Change Data Capture (CDC)
+
 
 ### 2.3 Apache Kafka Cluster
-- Core message broker of the system.
-- Uses Zookeeper for cluster management.
-- Topics are created dynamically based on environment variables in the docker-compose file.
+- The backbone of our operation - they handle all the message brokering and cluster management
 
 ### 2.4 Downstream Consumers
-- Multiple services that subscribe to relevant Kafka topics.
-- Process events according to their specific functions.
+- The listeners who act on the news - they're customizable for different business needs
 
 ### 2.5 Monitoring Consumer
-- Specialized consumer subscribed to the monitoring topic.
-- Stores monitoring events in a database for observability.
+- Our watchful eye - it keeps track of all the system events
 
 ### 2.6 Frontend Dashboard
-- Provides visual representation of product information updates.
-- Displays data from the monitoring database for system observability.
+- Where we can see what's happening - it gives us real-time insights into our system's health
 
 ## 3. Data Flow
 
@@ -121,26 +113,8 @@ This document describes the architecture and components of our Scalable and Resi
   - Publish events to Kafka topics
   - Create monitoring events for successful publications
 
-### 5.2 Apache Kafka and Zookeeper
-- **Configuration**: Docker-compose file with environment variables for topic creation
-- **Topics**: 
-  - Product update topics (potentially multiple based on event types)
-  - Monitoring topic
 
-### 5.3 Downstream Consumers
-- Subscribe to relevant Kafka topics
-- Process events based on business logic
-- Publish monitoring events upon successful processing
-
-### 5.4 Monitoring Consumer
-- Subscribes exclusively to the monitoring topic
-- Stores events in a database for analysis and display
-
-### 5.5 Frontend Dashboard
-- Queries the monitoring database
-- Displays real-time updates and system health metrics
-
-## 6. Deploying / Running The Code
+## 5. Deploying / Running The Code
 
 ## Prerequisites
 
@@ -272,3 +246,5 @@ graph TD
 2. **Data Synchronization**: Develop strategies for maintaining data consistency across instances.
 3. **Security**: Implement end-to-end encryption and robust authentication for inter-cloud communication.
 4. **Monitoring and Observability**: Create a centralized monitoring solution for a holistic system view.
+
+Got questions? Hit me up! Happy messaging! 🚀🚀🚀🚀🚀🚀
