@@ -55,7 +55,7 @@ def generate_product_promotion():
         "topic": "product_discounts",
         "data": {
             "product_id": str(uuid.uuid4()),
-            "promotion_type": random.choice(PROMOTION_TYPES),
+            "discount_type": random.choice(PROMOTION_TYPES),
             "discount_percentage": round(random.uniform(5, 50), 2),
             "start_date": datetime.now().isoformat(),
             "end_date": (datetime.now() + timedelta(days=random.randint(1, 30))).isoformat(),

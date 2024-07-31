@@ -22,9 +22,9 @@ class CountryData(BaseModel):
     total_sales: float = Field(ge=0)
     last_updated: Optional[datetime] = None
 
-class ProductPromotion(BaseModel):
+class ProductDiscounts(BaseModel):
     product_id: str
-    promotion_type: str
+    discount_type: str
     discount_percentage: float = Field(ge=0, le=100)
     start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
@@ -33,4 +33,4 @@ class ProductPromotion(BaseModel):
     
 class Event(BaseModel):
     topic: str
-    data: Union[ProductUpdate, CountryData, ProductPromotion]
+    data: Union[ProductUpdate, CountryData, ProductDiscounts]
